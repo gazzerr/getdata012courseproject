@@ -15,14 +15,14 @@ library(dplyr)
 
 
 # first read the features.txt file to be used as column labels
-features <- read.csv("cp-getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/features.txt",stringsAsFactors = FALSE, strip.white=TRUE, sep=" ",header = FALSE)
+features <- read.csv("UCI HAR Dataset/features.txt",stringsAsFactors = FALSE, strip.white=TRUE, sep=" ",header = FALSE)
 feature_labels<-features[,2]
 # unfortunately there are duplicated labels that would break reshaping and mutating activities later, so create valid names
 valid_column_names <- make.names(names=feature_labels, unique=TRUE, allow_ = TRUE)
 
 # get test and training data. Use strip.white=TRUE to strip leading spaces
-test_data <- read.csv("cp-getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/test/X_test.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
-train_data <- read.csv("cp-getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/train/X_train.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
+test_data <- read.csv("UCI HAR Dataset/test/X_test.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
+train_data <- read.csv("UCI HAR Dataset/train/X_train.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
 
 # load reshape2 library 
 library(reshape2)
@@ -31,14 +31,14 @@ test_data<- colsplit(test_data[,1]," +",valid_column_names)
 train_data<- colsplit(train_data[,1]," +",valid_column_names)
 
 # add subjectId column
-test_subjects<-read.csv("cp-getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/test/subject_test.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
-train_subjects<-read.csv("cp-getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/train/subject_train.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
+test_subjects<-read.csv("UCI HAR Dataset/test/subject_test.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
+train_subjects<-read.csv("UCI HAR Dataset/train/subject_train.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
 test_data<-cbind(subjectId=test_subjects[,1],test_data)
 train_data<-cbind(subjectId=train_subjects[,1],train_data)
 
 # add activityId column
-test_activities<-read.csv("cp-getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/test/y_test.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
-train_activities<-read.csv("cp-getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/train/y_train.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
+test_activities<-read.csv("UCI HAR Dataset/test/y_test.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
+train_activities<-read.csv("UCI HAR Dataset/train/y_train.txt",stringsAsFactors = FALSE, strip.white=TRUE,header = FALSE)
 test_data<-cbind(activityId=test_activities[,1],test_data)
 train_data<-cbind(activityId=train_activities[,1],train_data)
 
@@ -53,7 +53,7 @@ full_data_subset<-select(full_data,subjectId,activityId, contains("mean.."), con
 full_data_subset <- tbl_df(full_data_subset)
 
 # 3. replace activity ids by descriptive names
-activities <- read.csv("cp-getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/activity_labels.txt",stringsAsFactors = FALSE, strip.white=TRUE, sep=" ",header = FALSE)
+activities <- read.csv("UCI HAR Dataset/activity_labels.txt",stringsAsFactors = FALSE, strip.white=TRUE, sep=" ",header = FALSE)
 activity_labels<-activities[,2]
 full_data_subset<-mutate(full_data_subset,activityId=activity_labels[activityId])
 

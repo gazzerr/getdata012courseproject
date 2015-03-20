@@ -13,18 +13,27 @@ The script creates the tidy_set_output.txt file that contains a transformed data
 2) Each observation forms a row
 3) Each type of observational unit forms a table
 
-The variables are:
+Our output file contains a data frame with 180 observations on the following 36 variables:
+
 * subjectId - a number ranging from 1 to 30 identifying the subject who performed the activity
 * activity - a character describing the activity that was performed
 * other variables resemble the variables described in the original features_info.txt file. Namely 
-prefix 't' to denote time
-prefix 'f' to denote Fast Fourier Transform (FFT) applied to some of these signals
-Acc and Gyro to denote that signals come from the accelerometer and gyroscope
-Body and Gravity to denote that the acceleration was  separated into body and gravity acceleration
-X,Y,Z to denote 3-axial measurements
-Jerk to denote signals derived from body linear acceleration and angular velocity
-Mag to denote the magnitude of these three-dimensional signals
-Mean to denote the average of each variable for each activity and each subject.
+
+  - prefix 't' to denote time
+  
+  - prefix 'f' to denote Fast Fourier Transform (FFT) applied to some of these signals
+  
+  - Acc and Gyro to denote that signals come from the accelerometer and gyroscope
+  
+  - Body and Gravity to denote that the acceleration was  separated into body and gravity acceleration
+  
+  - X,Y,Z to denote 3-axial measurements
+  
+  - Jerk to denote signals derived from body linear acceleration and angular velocity
+  
+  - Mag to denote the magnitude of these three-dimensional signals
+  
+  - Mean to denote the average of each variable for each activity and each subject.
 
 ## Input data files 
 
